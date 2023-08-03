@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 import cv2
 import numpy as np
 import os
+import base64
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads/'
@@ -28,7 +29,7 @@ def highlightFace(net, frame, conf_threshold=0.7):
 
     return frameOpencvDnn, faceBoxes
 
-def detect_age_gender(image_path):
+def detect_age_gender(img):
     faceProto = "opencv_face_detector.pbtxt"
     faceModel = "opencv_face_detector_uint8.pb"
     ageProto = "age_deploy.prototxt"
@@ -44,7 +45,7 @@ def detect_age_gender(image_path):
     ageNet = cv2.dnn.readNet(ageModel, ageProto)
     genderNet = cv2.dnn.readNet(genderModel, genderProto)
 
-    frame = cv2.imread(image_path)
+    frame = cv2.imread(img)
     padding = 20
 
     resultImg, faceBoxes = highlightFace(faceNet, frame)
@@ -99,6 +100,11 @@ def upload_image():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
