@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Capture | Age and Gender Detection</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		/>
+	</head>
+	<body>
+		<nav
+			class="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between"
+		>
+			<a class="navbar-brand text-light" href="/">Age & Gender</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/capture">Capture</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/about">About</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="shadow-sm container my-5 p-3 bg-light rounded">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<h1 class="text-center">Capture from Camera</h1>
+					<div class="text-center mb-3">
+						<span
+							id="cameraIndicator"
+							style="
+								display: inline-block;
+								width: 10px;
+								height: 10px;
+								background-color: red;
+								border-radius: 50%;
+							"
+						></span>
+						<video
+							id="webcam"
+							width="640"
+							height="480"
+							class="rounded shadow-sm border border-success"
+							autoplay
+							style="display: none"
+						></video>
+						<h4 id="offMessage" class="text-center my-2">
+							Camera Off
+						</h4>
+					</div>
+					<div class="text-center mb-3">
+						<button id="openCamera" class="btn btn-primary mr-2">
+							Open Camera
+						</button>
+						<button id="capture" class="btn btn-success mr-2">
+							Capture
+						</button>
+						<button id="closeCamera" class="btn btn-danger">
+							Close Camera
+						</button>
+					</div>
+					<canvas
+						id="canvas"
+						width="640"
+						height="480"
+						class="rounded shadow-sm border border-success"
+						style="display: none"
+					></canvas>
+					<div class="text-center mt-3">
+						<p id="resultMessage" class="text-info"></p>
+						<button id="upload" class="btn btn-info">Upload</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="fixed-bottom">
+			<div class="bg-secondary py-2">
+				<div class="container text-center">
+					<p class="text-light mb-0 py-2">
+						Age & Gender Detection &copy; 2023 | All Rights
+					</p>
+				</div>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+			</scrip>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+		</script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script>
+			const offMessage = document.getElementById("offMessage");
+			const cameraIndicator = document.getElementById("cameraIndicator");
+			const video = document.getElementById("webcam");
+
+			// Open camera
+			document
+				.getElementById("openCamera")
+				.addEventListener("click", () => {
+					navigator.mediaDevices
+						.getUserMedia({ video: true })
+						.then((stream) => {
+							video.srcObject = stream;
+							video.style.display = "block"; // Show the video element
+							offMessage.style.display = "none"; // Hide the Off message
+							cameraIndicator.style.backgroundColor = "green"; // Set the indicator to green
+						})
+						.catch((err) => {
+							console.error("Error accessing the camera: " + err);
+						});
+				});
+
+			// Close camera
+			document
+				.getElementById("closeCamera")
+				.addEventListener("click", () => {
+					const stream = video.srcObject;
+					const tracks = stream.getTracks();
+					tracks.forEach((track) => {
+						track.stop();
+					});
+					video.srcObject = null;
+					video.style.display = "none"; // Hide the video element
+					offMessage.style.display = "block"; // Show the Off message
+					cameraIndicator.style.backgroundColor = "red"; // Set the indicator to red
+				});
+
+			// Get video element
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			// Get access to the webcam
+			navigator.mediaDevices
+				.getUserMedia({ video: false })
+				.then((stream) => {
+					video.srcObject = stream;
+				})
+				.catch((err) => {
+					console.error("Error accessing the camera: " + err);
+				});
+
+			// Capture the image to the canvas
+			document.getElementById("capture").addEventListener("click", () => {
+				// Check if the camera is on
+				if (video.srcObject === null) {
+					alert("Please open the camera before capturing an image.");
+					return; // Exit the function if the camera is off
+				}
+
+				ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+				canvas.style.display = "block";
+			});
+
+			// Upload the image
+			document.getElementById("upload").addEventListener("click", () => {
+				const image = canvas.toDataURL("image/jpeg");
+
+				// Send the image to the server
+				fetch("/capture", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ image: image }),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						// Handle the response
+						document.getElementById("resultMessage").innerText =
+							"Result: " + data.result;
+					})
+					.catch((err) => {
+						console.error("Error uploading the image: " + err);
+					});
+			});
+		</script>
+	</body>
+</html>
