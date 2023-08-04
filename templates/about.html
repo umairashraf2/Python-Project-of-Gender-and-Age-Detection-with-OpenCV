@@ -1,80 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | Age and Gender Detection</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <nav
-      class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between"
-    >
-      <a class="navbar-brand text-light" href="/">Age & Gender</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container my-5 shadow-sm bg-light rounded p-3">
-      <h1 class="text-center mb-4">About Age and Gender Detection</h1>
-      <p>
-        This application utilizes advanced computer vision and machine learning
-        algorithms to detect the age and gender of individuals in an uploaded
-        image.
-      </p>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>About | Age and Gender Detection</title>
+		<link
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<nav
+			class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between"
+		>
+			<a class="navbar-brand text-light" href="/">Age & Gender</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/capture">Capture</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/about">About</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container my-5 shadow-sm bg-light rounded p-3">
+			<h1 class="text-center mb-4">About Age and Gender Detection</h1>
+			<p>
+				This application utilizes advanced computer vision and machine
+				learning algorithms to detect the age and gender of individuals
+				in an uploaded image.
+			</p>
 
-      <h3>How It Works:</h3>
-      <ol>
-        <li>Upload an image containing one or more faces.</li>
-        <li>The application processes the image, identifying the faces.</li>
-        <li>It then estimates the age and gender for each detected face.</li>
-        <li>
-          The results are presented along with the original image, highlighting
-          the detected faces.
-        </li>
-      </ol>
+			<h3>How It Works:</h3>
+			<ol>
+				<li>Upload an image containing one or more faces.</li>
+				<li>
+					The application processes the image, identifying the faces.
+				</li>
+				<li>
+					It then estimates the age and gender for each detected face.
+				</li>
+				<li>
+					The results are presented along with the original image,
+					highlighting the detected faces.
+				</li>
+			</ol>
 
-      <h3>Technologies Used:</h3>
-      <ul>
-        <li>OpenCV: For image processing and face detection.</li>
-        <li>Deep Learning Models: For age and gender prediction.</li>
-        <li>Flask: For creating the web application interface.</li>
-      </ul>
-
-      <a href="/" class="btn btn-secondary btn-block mt-3">Go Back</a>
-    </div>
-    <footer class="fixed-bottom">
-      <div class="bg-secondary py-2">
-        <div class="container text-center">
-          <p class="text-light mb-0 py-2">
-            Age & Gender Detection &copy; 2023 | All Rights
-          </p>
-        </div>
-      </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </body>
+			<h3>Backend Technologies Used:</h3>
+			<ul>
+				<li>OpenCV: For image processing and face detection.</li>
+				<li>Deep Learning Models: For age and gender prediction.</li>
+				<li>Flask: For creating the web application interface.</li>
+			</ul>
+			<h3>Frontend Technologies Used:</h3>
+			<ul>
+				<li>HTML: For structuring the content.</li>
+				<li>Bootstrap: For styling and responsive design.</li>
+				<li>JavaScript: For adding interactivity to the page.</li>
+			</ul>
+			<a href="/" class="btn btn-secondary btn-block mt-3">Go Back</a>
+		</div>
+		<footer class="fixed-bottom">
+			<div class="bg-secondary py-2">
+				<div class="container text-center">
+					<p class="text-light mb-0 py-2">
+						Age & Gender Detection &copy; 2023 | All Rights
+					</p>
+				</div>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</body>
 </html>
