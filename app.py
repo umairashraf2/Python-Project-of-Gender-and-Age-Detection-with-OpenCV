@@ -106,5 +106,25 @@ def uploaded_file(filename):
 def about():
     return render_template('about.html')
 
+@app.route('/capture', methods=['GET', 'POST'])
+def capture_image():
+    if request.method == 'POST':
+        # Parse the base64 image
+        data = request.json['image']
+        header, encoded = data.split(",", 1)
+        binary_data = base64.b64decode(encoded)
+
+        # Save the image
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], "captured.jpg")
+        with open(image_path, 'wb') as f:
+            f.write(binary_data)
+
+        results, _ = detect_age_gender(image_path)
+        # You can further process the results here, e.g., render a result page
+        return jsonify({"result": results})
+
+    return render_template('capture.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
