@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Age and Gender Detection</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <style>
+      /* Your custom CSS styles for light and dark mode here */
+      body.light-mode {
+        background-color: #333;
+      }
+      body.dark-mode {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body class="light-mode">
+    <nav
+      class="nava navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between"
+    >
+      <a class="navbar-brand" href="/">Age & Gender</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/capture">Capture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <button class="btn btn-secondary toggle-mode-button">
+            Toggle Mode
+          </button>
+        </ul>
+      </div>
+    </nav>
+
+    <div
+      class="content shadow-sm container my-5 p-2 bg-dark text-light rounded"
+    >
+      {% block content %} {% endblock %}
+    </div>
+
+    <footer class="fixed-bottom">
+      <div class="footer bg-dark py-2 text-light">
+        <div class="container text-center">
+          <p class="mb-0 py-2">
+            Age & Gender Detection &copy; 2023 | All Rights
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      // JavaScript for light and dark mode toggle and local storage
+      const body = document.body;
+      const navbar = document.querySelector(".nava");
+      const footer = document.querySelector(".footer");
+      const content = document.querySelector(".content");
+      const toggleButton = document.querySelector(".toggle-mode-button");
+      updateToggleButton();
+
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        body.classList.toggle("light-mode");
+        navbar.classList.toggle("navbar-light");
+        navbar.classList.toggle("bg-light");
+        navbar.classList.toggle("navbar-dark");
+        navbar.classList.toggle("bg-dark");
+        footer.classList.toggle("bg-light");
+        footer.classList.toggle("bg-dark");
+        footer.classList.toggle("text-light");
+        footer.classList.toggle("text-dark");
+        content.classList.toggle("bg-light");
+        content.classList.toggle("bg-dark");
+        content.classList.toggle("text-light");
+        content.classList.toggle("text-dark");
+
+        updateToggleButton();
+        const currentMode = body.classList.contains("dark-mode")
+          ? "light"
+          : "dark";
+        localStorage.setItem("mode", currentMode);
+      });
+
+      function updateToggleButton() {
+        toggleButton.innerText = body.classList.contains("dark-mode")
+          ? "Dark Mode"
+          : "Light Mode";
+        toggleButton.classList.toggle("btn-light");
+        toggleButton.classList.toggle("btn-secondary");
+      }
+
+      const path = window.location.pathname;
+      const links = document.querySelectorAll(".nav-link");
+      for (const link of links) {
+        if (link.getAttribute("href") === path) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      }
+
+      // Retrieve saved mode from localStorage and apply it on page load
+      const savedMode = localStorage.getItem("mode");
+      if (savedMode === "dark") {
+        toggleButton.click();
+      }
+    </script>
+  </body>
+</html>
