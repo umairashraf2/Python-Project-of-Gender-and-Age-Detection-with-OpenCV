@@ -1,90 +1,22 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Age and Gender Detection</title>
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		/>
-	</head>
-	<body>
-		<nav
-			class="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between"
-		>
-			<a class="navbar-brand text-light" href="/">Age & Gender</a>
-			<button
-				class="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarNavDropdown"
-				aria-controls="navbarNavDropdown"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="/">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/capture">Capture</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/about">About</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-
-		<div class="shadow-sm container my-5 p-2 bg-light rounded">
-			<div class="row">
-				<div class="col-md-6 offset-md-3">
-					<h1 class="text-center">Upload an Image</h1>
-					<form
-						action="/"
-						method="POST"
-						enctype="multipart/form-data"
-					>
-						<div class="form-group">
-							<label for="image">Choose an image</label>
-							<input
-								type="file"
-								name="image"
-								class="form-control-file"
-								accept="image/*"
-								required
-							/>
-						</div>
-						<div class="form-group text-center">
-							<input
-								type="submit"
-								value="Detect"
-								class="btn btn-secondary"
-							/>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-
-		<footer class="fixed-bottom">
-			<div class="bg-secondary py-2">
-				<div class="container text-center">
-					<p class="text-light mb-0 py-2">
-						Age & Gender Detection &copy; 2023 | All Rights
-					</p>
-				</div>
-			</div>
-		</footer>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
-			</scrip>
-					<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-		</script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-		
-	</body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="text-center">Upload an Image</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="image">Choose an image</label>
+        <input
+          type="file"
+          name="image"
+          class="form-control-file"
+          accept="image/*"
+          required
+        />
+      </div>
+      <div class="form-group text-center">
+        <input type="submit" value="Detect" class="btn btn-secondary" />
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
