@@ -51,6 +51,7 @@ Capture an image to get the results.
 
 ### Contact
 
-If you have any questions or need further assistance, feel free to reach out to me at umairashraf5252@gmail.com
+If you have any questions or need further assistance, feel free to reach out to me at umairashraf5252@gmail.com.
+`https://umair22.pythonanywhere.com/` with the actual URL of your live preview and `https://fivetentech.com/` with the URL of our website. This will provide users with a way to contact you for questions or assistance related to your web app.
 
 
