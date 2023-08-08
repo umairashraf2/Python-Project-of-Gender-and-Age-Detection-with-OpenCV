@@ -47,7 +47,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-          <button class="btn btn-secondary toggle-mode-button">
+          <button class="btn btn-light toggle-mode-button">
             Toggle Mode
           </button>
         </ul>
@@ -74,14 +74,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
       // JavaScript for light and dark mode toggle and local storage
-      const body = document.body;
-      const navbar = document.querySelector(".nava");
-      const footer = document.querySelector(".footer");
-      const content = document.querySelector(".content");
-      const toggleButton = document.querySelector(".toggle-mode-button");
-      updateToggleButton();
+document.addEventListener("DOMContentLoaded", function() {
+    const body = document.body;
+    const navbar = document.querySelector(".nava");
+    const footer = document.querySelector(".footer");
+    const content = document.querySelector(".content");
+    const toggleButton = document.querySelector(".toggle-mode-button");
 
-      toggleButton.addEventListener("click", () => {
+    toggleButton.addEventListener("click", () => {
+        toggleTheme();
+        saveTheme();
+    });
+
+    function toggleTheme() {
         body.classList.toggle("dark-mode");
         body.classList.toggle("light-mode");
         navbar.classList.toggle("navbar-light");
@@ -96,37 +101,43 @@
         content.classList.toggle("bg-dark");
         content.classList.toggle("text-light");
         content.classList.toggle("text-dark");
-
         updateToggleButton();
-        const currentMode = body.classList.contains("dark-mode")
-          ? "light"
-          : "dark";
+    }
+
+    function saveTheme() {
+        const currentMode = body.classList.contains("dark-mode") ? "dark" : "light";
         localStorage.setItem("mode", currentMode);
-      });
+    }
 
-      function updateToggleButton() {
-        toggleButton.innerText = body.classList.contains("dark-mode")
-          ? "Dark Mode"
-          : "Light Mode";
-        toggleButton.classList.toggle("btn-light");
+    function updateToggleButton() {
+        toggleButton.innerText = body.classList.contains("dark-mode") ? "Dark Mode" : "Light Mode";
         toggleButton.classList.toggle("btn-secondary");
-      }
+        toggleButton.classList.toggle("btn-light");
+    }
 
-      const path = window.location.pathname;
-      const links = document.querySelectorAll(".nav-link");
-      for (const link of links) {
+    const path = window.location.pathname;
+    const links = document.querySelectorAll(".nav-link");
+    for (const link of links) {
         if (link.getAttribute("href") === path) {
-          link.classList.add("active");
+            link.classList.add("active");
         } else {
-          link.classList.remove("active");
+            link.classList.remove("active");
         }
-      }
+    }
 
-      // Retrieve saved mode from localStorage and apply it on page load
-      const savedMode = localStorage.getItem("mode");
-      if (savedMode === "dark") {
-        toggleButton.click();
-      }
+    // Initialization: Retrieve saved mode from localStorage and apply it on page load
+    function initializeTheme() {
+        const savedMode = localStorage.getItem("mode");
+        if (savedMode === "dark" && !body.classList.contains("dark-mode")) {
+            toggleTheme();
+        } else if (savedMode === "light" && !body.classList.contains("light-mode")) {
+            toggleTheme();
+        }
+    }
+
+    initializeTheme();
+});
+
     </script>
   </body>
 </html>
