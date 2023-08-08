@@ -8,7 +8,7 @@
 
 ## Preview
 
-Link: https://umair22.pythonanywhere.com/
+Check out the live preview of the web app: [Live Preview](<https://umair22.pythonanywhere.com/>)
 
 ## Overview
 Age and Gender Detection is a web application that uses computer vision and machine learning algorithms to detect the age and gender of individuals in an uploaded image. Users can upload images containing one or more faces, and the application will estimate the age and gender for each detected face.
