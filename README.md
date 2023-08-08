@@ -6,7 +6,9 @@
 ![image](https://github.com/umairashraf2/flask_age_gender_detection/assets/85620958/22187bd3-3b31-4450-b365-9907ddce904f)
 ![image](https://github.com/umairashraf2/flask_age_gender_detection/assets/85620958/f0a08fcf-5111-4a7d-97e3-96ba70260cf7)
 
+## Preview
 
+Link: https://umair22.pythonanywhere.com/
 
 ## Overview
 Age and Gender Detection is a web application that uses computer vision and machine learning algorithms to detect the age and gender of individuals in an uploaded image. Users can upload images containing one or more faces, and the application will estimate the age and gender for each detected face.
